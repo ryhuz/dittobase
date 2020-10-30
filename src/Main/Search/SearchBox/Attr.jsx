@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Form } from 'react-bootstrap'
 
 function Attr({change}) {
@@ -12,11 +12,26 @@ function Attr({change}) {
                     <Form.Label>Filter by Type</Form.Label>
                     <Form.Control as="select" name="type" onChange={change}>
                         <option>All</option>
-                        <option>Water</option>
-                        <option>Fire</option>
-                        <option>Grass</option>
-                        <option>Bug</option>
+                        <option>Normal</option>
+                        <option>Fighting</option>
+                        <option>Flying</option>
                         <option>Poison</option>
+                        <option>Ground</option>
+                        <option>Rock</option>
+                        <option>Bug</option>
+                        <option>Ghost</option>
+                        <option>Steel</option>
+                        <option>Fire</option>
+                        <option>Water</option>
+                        <option>Grass</option>
+                        <option>Electric</option>
+                        <option>Psychic</option>
+                        <option>Ice</option>
+                        <option>Dragon</option>
+                        <option>Dark</option>
+                        <option>Fairy</option>
+                        <option>Unknown</option>
+                        <option>Shadow</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="filter-gen" className="col-3">

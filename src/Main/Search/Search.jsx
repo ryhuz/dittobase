@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Jumbotron, Container } from 'react-bootstrap'
 import SearchBox from './SearchBox/SearchBox';
-import SearchResults from './SearchResults'
+import SearchResults from './Result/SearchResults'
 
 function Search() {
     const [searchParam, setSearchParam] = useState({ 
