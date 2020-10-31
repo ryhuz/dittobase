@@ -43,6 +43,10 @@ function Attr({change}) {
                         <option>III</option>
                         <option>IV</option>
                         <option>V</option>
+                        <option>VI</option>
+                        <option>VII</option>
+                        <option>VIII</option>
+                        <option>Others</option>
                     </Form.Control>
                 </Form.Group>
             </Form>

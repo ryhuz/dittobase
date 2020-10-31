@@ -131,9 +131,9 @@ function Search() {
                         {data.map((el, index) => (
                             searchParam.attr.name ?
                                 (el.name.includes(searchParam.attr.name.toLowerCase()) ?
-                                    <CardData key={index} pokeData={el} /> : ""
+                                    <CardData key={index} pokeData={el} genFilter={searchParam.attr.gen}/> : ""
                                 ) :
-                                <CardData key={index} pokeData={el} />
+                                <CardData key={index} pokeData={el} genFilter={searchParam.attr.gen}/>
                         ))}
                     </Row>
                 </Container>
