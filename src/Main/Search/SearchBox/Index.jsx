@@ -6,12 +6,12 @@ function Index({change}) {
     return (
         <Form className="row pl-4">
             <Form.Group controlId="search-pokemon" className="col-3">
-                <Form.Label>By Index</Form.Label>
-                <Form.Control type="text" name="indexStart" onChange={change}/>
+                <Form.Label>From Index<span className="small">(min 1)</span></Form.Label>
+                <Form.Control type="number" name="indexStart" onChange={change} min="1" />
             </Form.Group>
             <Form.Group controlId="search-pokemon" className="col-3">
-                <Form.Label>By Index</Form.Label>
-                <Form.Control type="text" name="indexEnd" onChange={change}/>
+                <Form.Label>To Index <span className="small">(max 898)</span></Form.Label>
+                <Form.Control type="number" name="indexEnd" onChange={change} min="1" />
             </Form.Group>
         </Form>
     )

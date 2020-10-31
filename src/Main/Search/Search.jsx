@@ -25,7 +25,15 @@ function Search() {
 
     function change(e) {
         if (e.target.name.includes('index')) {
+<<<<<<< HEAD
             setSearchParam({ attr: { name: "", type: "All", gen: "All", }, index: { ...searchParam.index, [e.target.name]: e.target.value } });
+=======
+            if(isNaN(e.target.value) || Number(e.target.value) <=0 ){
+                e.target.value = "";
+            }else{
+                setSearchParam({ attr: { name: "", type: "All", gen: "All", }, index: { ...searchParam.index, [e.target.name]: e.target.value } });
+            }
+>>>>>>> infinite-scroll
         } else {
             setSearchParam({ attr: { ...searchParam.attr, [e.target.name]: e.target.value, }, index: { indexStart: "", indexEnd: "", } });
         }
@@ -121,7 +129,11 @@ function Search() {
     }
 
     window.onscroll = debounce(() => {
+<<<<<<< HEAD
         if (loadLimit.error || loadLimit.isLoading || loadLimit>pokeSearch.length) return;
+=======
+        if (loadLimit.error || loadingMore || loadLimit>pokeSearch.length) return;
+>>>>>>> infinite-scroll
         if (window.innerHeight + document.documentElement.scrollTop === document.body.scrollHeight) {
             setLoadLimit({ ...loadLimit, limit: loadLimit.limit+20, });
             loadingMore = true;
@@ -134,6 +146,15 @@ function Search() {
             let pLimit = pokeSearch.length
             let count = 0;
             let curr = 0;
+<<<<<<< HEAD
+=======
+            if (searchParam.index.indexStart){
+                curr = Number(searchParam.index.indexStart) - 1;
+                if(searchParam.index.indexEnd && Number(searchParam.index.indexEnd)>Number(searchParam.index.indexStart)){
+                    pLimit = Number(searchParam.index.indexEnd)
+                }
+            }
+>>>>>>> infinite-scroll
             while (count < loadLimit.limit && count < pokeSearch.length && curr < pLimit) {
                 if (searchParam.attr.name === '' && searchParam.attr.gen === 'All') {
                     if (pokeSearch[curr].pokemon) {

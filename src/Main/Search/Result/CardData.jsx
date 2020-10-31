@@ -1,19 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Card, Col, Container } from 'react-bootstrap'
+import Loading from '../Loading'
 
-function CardData({data}) {
-    let name = "";
-    let img  = "";
-    if(data.name){
-        name = data.name[0].toUpperCase()+data.name.slice(1);
-        img = data.sprites.other['official-artwork'].front_default;
-    }
+function CardData({ pokeData }) {
+    const [data, setData] = useState({
+        id: "",
+        name: pokeData.name,
+        img: "",
+        gen: "",
+    })
+    const [loading, setLoad] = useState(false)
+
+    useEffect(() => {
+        setLoad(true);
+        let axios = require('axios');
+        axios.get(pokeData.url)
+            .then(result => {
+                let tempName = result.data.name;
+                tempName = tempName[0].toUpperCase() + tempName.slice(1);
+
+                setData({
+                    id: result.data.id,
+                    name: tempName,
+                    img: result.data.sprites.other['official-artwork'].front_default,
+                })
+                setLoad(false);
+            })
+    }, [])
+
     return (
-        <div className="p-4">
-            <span className="p-4 h5">
-                #{data.id} - {name}
-            </span>
-                <img width="90%" src={img} />
-        </div>
+        <>
+            <Col md={3} xs={5} className="p-3 mx-auto">
+                <Card>
+                    {loading ? <Loading /> : <div className="text-center pt-2">
+                        <span>#{data.id} - <b>{data.name}</b></span>
+                        <img className="p-3" width="100%" src={data.img} />
+                    </div>
+                    }
+                </Card>
+            </Col>
+        </>
     )
 }
 
