@@ -121,7 +121,7 @@ function Search() {
     }
 
     window.onscroll = debounce(() => {
-        if (loadLimit.error || loadLimit.isLoading || loadLimit>pokeSearch.length) return;
+        if (loadLimit.error || loadingMore || loadLimit>pokeSearch.length) return;
         if (window.innerHeight + document.documentElement.scrollTop === document.body.scrollHeight) {
             setLoadLimit({ ...loadLimit, limit: loadLimit.limit+20, });
             loadingMore = true;
