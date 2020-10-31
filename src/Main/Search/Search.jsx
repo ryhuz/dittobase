@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Jumbotron, Container, Row, Col, Card } from 'react-bootstrap'
 import Loading from './Loading';
+import CardData from './Result/CardData';
 import SearchBox from './SearchBox/SearchBox';
 
 function Search() {
@@ -104,31 +105,18 @@ function Search() {
         }).then(result => {
             setPokeSearch(getType ? result.data.pokemon : result.data.results);
             setLoad(false);
-        }).catch(err => {
-            setLoad(false);
-            console.log("Error at getting serach results");
-        })
+        }).then(() => {
 
-        /* function resultURL() {
-            let temp = [];
-            for (let i = 0; i < pokeResults.length; i++) {
-                let getURL = axios.get(pokeResults[i].url);
-                getURL.then(r => {
-                    temp.push({
-                        id: r.data.id,
-                        name: r.data.name,
-                        img: r.data.sprites.other['official-artwork'].front_default,
-                    })
-                })
-            }
-            setPokeURLs(temp);
-            console.log(pokeURLs);
-        } */
+        }).catch(err => {
+                setLoad(false);
+                console.log("Error at getting serach results");
+            })
     }
 
     function renderSearch() {
+        let data = [];
+
         if (pokeSearch.length) {
-            let data = [];
             if (pokeSearch[0].pokemon) {
                 pokeSearch.forEach(x => {
                     data.push(x.pokemon);
@@ -136,28 +124,21 @@ function Search() {
             } else {
                 data = pokeSearch;
             }
+        }
             return (<>
                 <Container>
                     <Row >
                         {data.map((el, index) => (
                             searchParam.attr.name ?
                                 (el.name.includes(searchParam.attr.name.toLowerCase()) ?
-                                    <Col md={3} className="p-3" key={index}>
-                                        <Card>
-                                            {el.name}-{el.url}
-                                        </Card>
-                                    </Col> : ""
+                                    <CardData key={index} pokeData={el} /> : ""
                                 ) :
-                                <Col md={3} className="p-3" key={index}>
-                                    <Card>
-                                        {el.name}-{el.url}
-                                    </Card>
-                                </Col>
+                                <CardData key={index} pokeData={el} />
                         ))}
                     </Row>
                 </Container>
             </>)
-        }
+
     }
 
     useEffect(() => {
