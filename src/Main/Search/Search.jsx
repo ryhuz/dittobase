@@ -3,6 +3,7 @@ import { Jumbotron, Container, Row, Col, Card } from 'react-bootstrap'
 import Loading from './Loading';
 import CardData from './Result/CardData';
 import SearchBox from './SearchBox/SearchBox';
+import debounce from "lodash.debounce";
 
 function Search() {
     const [searchParam, setSearchParam] = useState({
@@ -15,7 +16,11 @@ function Search() {
     });
     const [pokeSearch, setPokeSearch] = useState([]);
     const [loading, setLoad] = useState(false);
-    let limit = 3;
+    const [loadLimit, setLoadLimit] = useState({
+        error: false,
+        limit: 20,
+    });
+    let loadingMore = false;
     let cancel = '';
 
     function change(e) {
@@ -25,7 +30,9 @@ function Search() {
             setSearchParam({ attr: { ...searchParam.attr, [e.target.name]: e.target.value, }, index: { indexStart: "", indexEnd: "", } });
         }
         setLoad(true);
+        setLoadLimit({ ...loadLimit, limit: 20, });
     }
+    let debounceChange = debounce((change), 600);
 
     function getSearchResults() {
         let axios = require('axios');
@@ -100,44 +107,108 @@ function Search() {
         }
         cancel = axios.CancelToken.source();
 
-        axios.get(`https://pokeapi.co/api/v2/${getType ? getType : 'pokemon'}?limit=${limit}`, {
+        axios.get(`https://pokeapi.co/api/v2/${getType ? getType : 'pokemon'}?limit=898`, {
             cancelToken: cancel.token
         }).then(result => {
             setPokeSearch(getType ? result.data.pokemon : result.data.results);
             setLoad(false);
-        }).then(() => {
-
         }).catch(err => {
-                setLoad(false);
-                console.log("Error at getting serach results");
-            })
+            setLoad(false);
+            setLoadLimit({ ...loadLimit, error: true });
+            alert("Error at getting search results");
+            console.log('error = ', err);
+        })
     }
+
+    window.onscroll = debounce(() => {
+        if (loadLimit.error || loadLimit.isLoading || loadLimit>pokeSearch.length) return;
+        if (window.innerHeight + document.documentElement.scrollTop === document.body.scrollHeight) {
+            setLoadLimit({ ...loadLimit, limit: loadLimit.limit+20, });
+            loadingMore = true;
+        }
+    }, 500);
 
     function renderSearch() {
         let data = [];
-
-        if (pokeSearch.length) {
-            if (pokeSearch[0].pokemon) {
-                pokeSearch.forEach(x => {
-                    data.push(x.pokemon);
-                })
-            } else {
-                data = pokeSearch;
+        if (!loadLimit.error) {
+            let pLimit = pokeSearch.length
+            let count = 0;
+            let curr = 0;
+            while (count < loadLimit.limit && count < pokeSearch.length && curr < pLimit) {
+                if (searchParam.attr.name === '' && searchParam.attr.gen === 'All') {
+                    if (pokeSearch[curr].pokemon) {
+                        data.push(pokeSearch[curr].pokemon);
+                    } else {
+                        data.push(pokeSearch[curr]);
+                    }
+                    count++;
+                } else {
+                    let chkName = searchParam.attr.name === '' ? false : true;
+                    let chkGen = searchParam.attr.gen === 'All' ? false : true;
+                    let namePass = false;
+                    let genPass = false;
+                    if (chkGen) {
+                        let tempGen = "";
+                        let x = (pokeSearch[curr].pokemon ? pokeSearch[curr].pokemon.url.split('/')[6] : pokeSearch[curr].url.split('/')[6]);
+                        switch (true) {
+                            case (x <= 151):
+                                tempGen = 'I';
+                                break;
+                            case (x <= 251):
+                                tempGen = 'II';
+                                break;
+                            case (x <= 386):
+                                tempGen = 'III';
+                                break;
+                            case (x <= 493):
+                                tempGen = 'IV';
+                                break;
+                            case (x <= 649):
+                                tempGen = 'V';
+                                break;
+                            case (x <= 721):
+                                tempGen = 'VI';
+                                break;
+                            case (x <= 809):
+                                tempGen = 'VII';
+                                break;
+                            case (x <= 898):
+                                tempGen = 'VII';
+                                break;
+                            default:
+                                tempGen = 'Others';
+                                break;
+                        }
+                        if (searchParam.attr.gen === tempGen) {
+                            genPass = true;
+                        }
+                    }
+                    if (chkName) {
+                        let x = (pokeSearch[curr].pokemon ? pokeSearch[curr].pokemon.name : pokeSearch[curr].name);
+                        namePass = x.includes(searchParam.attr.name);
+                    }
+                    if (chkName === namePass && chkGen === genPass) {
+                        if (pokeSearch[curr].pokemon) {
+                            data.push(pokeSearch[curr].pokemon);
+                        } else {
+                            data.push(pokeSearch[curr]);
+                        }
+                        count++;
+                    }
+                }
+                curr++
             }
         }
-            return (<>
-                <Container>
-                    <Row >
-                        {data.map((el, index) => (
-                            searchParam.attr.name ?
-                                (el.name.includes(searchParam.attr.name.toLowerCase()) ?
-                                    <CardData key={index} pokeData={el} genFilter={searchParam.attr.gen}/> : ""
-                                ) :
-                                <CardData key={index} pokeData={el} genFilter={searchParam.attr.gen}/>
-                        ))}
-                    </Row>
-                </Container>
-            </>)
+        loadingMore = false;
+        return (<>
+            <Container className='mb-5'>
+                <Row >
+                    {data.map((el, index) => (
+                        <CardData key={index} pokeData={el} />
+                    ))}
+                </Row>
+            </Container>
+        </>)
 
     }
 
@@ -155,10 +226,10 @@ function Search() {
             <Container className="h3 mb-4">
                 Search
             </Container>
-            <SearchBox change={change} />
+            <SearchBox change={debounceChange} />
             {!loading && renderSearch()}
             {loading && <Loading />}
-
+            {loadingMore && <Loading />}
         </div>
     )
 }
