@@ -1,6 +1,6 @@
 import React from 'react'
 import loading from '../../charmander_loading.gif'
-import { Jumbotron, Container, Row, Col, Card } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 function Loading() {
     return (
