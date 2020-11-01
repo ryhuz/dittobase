@@ -164,7 +164,7 @@ function Pokemon() {
                                     {Array.isArray(el.version) ?
                                         el.version.map((x) => (
                                             <div>
-                                                {x.name[0].toUpperCase() + x.name.slice(1)}
+                                                {x.name ? x.name[0].toUpperCase() + x.name.slice(1) : ""}
                                             </div>
                                         )) :
                                         (el.version.name[0].toUpperCase() + el.version.name.slice(1))}
@@ -216,10 +216,10 @@ function Pokemon() {
             <Container className="mt-4">
                 <hr />
                 <Row>
-                    <Col md={6}>
+                    <Col md={5}>
                         <img src={thisPokeData.img} width="70%" />
                     </Col>
-                    <Col md={6}>
+                    <Col md={7}>
                         {showDesc()}
                     </Col>
                 </Row>
