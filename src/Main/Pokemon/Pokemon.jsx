@@ -116,7 +116,7 @@ function Pokemon() {
 
                         if (version.move_learn_method.name === 'egg') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
-                            tempMoves[version.version_group.name][version.move_learn_method.name].push(move.move.name);
+                            tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name });
                         } else if (version.move_learn_method.name === 'level-up') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
                             tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name, level: version.level_learned_at })
@@ -125,7 +125,7 @@ function Pokemon() {
                             tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name, url: version.move_learn_method.url });
                         } else if (version.move_learn_method.name === 'tutor') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
-                            tempMoves[version.version_group.name][version.move_learn_method.name].push(move.move.name)
+                            tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name })
                         } else {
                         }
                     })
