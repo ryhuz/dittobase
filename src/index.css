@@ -42,6 +42,36 @@ code {
   position: sticky;
 }
 
-/* .genDesc, .pokeName{
-  margin-top: -30px;
-} */
+#poke-title {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#poke-desc-head .poke-desc-version {
+  width:20%;
+}
+#poke-desc-body .poke-desc-version {
+    width: 20.2%;
+}
+
+#poke-desc-body {
+  display: block;
+  height: 304px;
+  overflow-y: auto;
+}
+
+#poke-desc-body, #poke-desc-body tr{
+  width: 100%
+}
+
+#poke-desc-table {
+  margin-top: -17px
+}
+
+#poke-moves-body {
+  overflow-x: auto;
+}
+
+#poke-moves-body td.data {
+  min-width: 150px;
+}
