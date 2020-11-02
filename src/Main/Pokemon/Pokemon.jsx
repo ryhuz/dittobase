@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Badge } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Description from './Description';
 import Stats from './Stats';
-import Moves from './Moves';
+import Moves from './Moves/Moves';
+import PokeTitle from './PokeTitle';
 
 function Pokemon() {
     // https://pokeapi.co/api/v2/pokemon-species/1/ for description, evolution chain
@@ -158,34 +157,7 @@ function Pokemon() {
     return (
         <>
             {thisPokeData.loading && <>
-                <Row className="mt-3" id="poke-title">
-                    <Col md={2} xs={3} className="text-center d-flex flex-column align-items-center justify-content-center">
-                        <div className="pl-2">
-                            Previous Pokémon
-                            </div>
-                        <div>
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </div>
-                    </Col>
-                    <Col md={8} xs={6} className="d-flex justify-content-space-between border shadow py-2 pl-4">
-                        <div>
-                            <h5><Badge variant="secondary" className="py-1 px-3" >#{id}</Badge></h5>
-                            <h2>{thisPokeData.name}</h2>
-                            <div>Generation {gen}</div>
-                        </div>
-                        <div>
-                            <img src={thisPokeData.sprite} />
-                        </div>
-                    </Col>
-                    <Col md={2} xs={3} className="text-center d-flex flex-column align-items-center justify-content-center">
-                        <div className="pr-2">
-                            Next Pokémon
-                            </div>
-                        <div>
-                            <FontAwesomeIcon icon={faArrowRight} />
-                        </div>
-                    </Col>
-                </Row>
+                <PokeTitle id={id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite} type={thisPokeData.type} />
                 <Container className="mt-4">
                     <hr />
                     <Row>
