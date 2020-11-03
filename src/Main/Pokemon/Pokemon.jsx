@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
-import Description from './Description';
-import Stats from './Stats';
+import Description from './Cards/Description';
+import Stats from './Cards/Stats';
 import Moves from './Moves/Moves';
 import PokeTitle from './PokeTitle';
+import Evolution from './Cards/Evolution';
+import PokeDex from './Cards/PokeDex';
+import Training from './Cards/Training';
 
 function Pokemon() {
     // https://pokeapi.co/api/v2/pokemon-species/1/ for description, evolution chain
@@ -43,20 +46,26 @@ function Pokemon() {
     }
 
     const [thisPokeData, setThisPokeData] = useState({
-        name: "",
-        sprite: "",
-        height: "",
-        weight: "",
-        img: "",
+        abilities: [],
+        base_exp: "",
+        capture_rate: "",
         desc: [],
         evo: [],
+        growth_rate: "",
+        habitat: "",
+        height: "",
+        id: "",
+        img: "",
         moves: [],
+        movesInfo: [],
+        name: "",
+        shape: "",
+        sprite: "",
         stats: [],
         type: [],
+        weight: "",
         loading: false,
     });
-
-
 
     function getPokeData() {
         let axios = require('axios');
@@ -68,6 +77,7 @@ function Pokemon() {
             .then(axios.spread((...res) => {
                 let tempDesc = [];
                 let tempMoves = {};
+                let tempMovesInfo = []
                 let tempImg = "";
                 let tempSprite = "";
                 try {
@@ -101,8 +111,9 @@ function Pokemon() {
                         }
                     })
                 }
-                
+
                 res[0].data.moves.forEach(move => {
+                    tempMovesInfo.push({ name: move.move.name, url: move.move.url, })
                     move.version_group_details.forEach(version => {
                         function propertyChk(ver, meth) {
                             if (!tempMoves.hasOwnProperty(ver)) {
@@ -112,7 +123,6 @@ function Pokemon() {
                                 tempMoves[ver][meth] = [];
                             }
                         }
-
                         if (version.move_learn_method.name === 'egg') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
                             tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name });
@@ -131,54 +141,65 @@ function Pokemon() {
                 })
                 getDesc();
                 setThisPokeData({
-                    name: res[0].data.name[0].toUpperCase() + res[0].data.name.slice(1),
-                    sprite: tempSprite,
-                    img: tempImg,
+                    abilities: res[0].data.abilities,
+                    base_exp: res[0].data.base_experience,
+                    capture_rate: res[1].data.capture_rate,
+                    desc: tempDesc,
+                    evo: res[1].data.evolution_chain.url,
+                    growth_rate: res[1].data.growth_rate.name,
+                    habitat: res[1].data.habitat.name,
                     height: res[0].data.height,
-                    weight: res[0].data.weight,
-                    type: res[0].data.types.map(x => x.type.name),
+                    id: res[0].data.id,
+                    img: tempImg,
                     moves: tempMoves,
+                    movesInfo: tempMovesInfo,
+                    name: res[0].data.name[0].toUpperCase() + res[0].data.name.slice(1),
+                    shape: res[1].data.shape.name,
+                    sprite: tempSprite,
                     stats: res[0].data.stats.map(x => {
                         return { name: x.stat.name, base_stat: x.base_stat }
                     }),
-                    desc: tempDesc,
+                    type: res[0].data.types.map(x => x.type.name),
+                    weight: res[0].data.weight,
                     loading: true,
                 })
-
             })).catch(err => {
-
+                console.log(err);
             })
         //--------------------------------------------------------------------------------------------------------------------------
     }
-
     useEffect(() => {
         getPokeData();
-    }, [])
+    }, [id])
     return (
         <>
             {thisPokeData.loading && <>
-                <PokeTitle id={id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite} type={thisPokeData.type} />
-                <Container className="mt-4">
+                <PokeTitle id={thisPokeData.id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite}/>
+                <Container className="mt-4" id="poke-body">
                     <hr />
                     <Row>
                         <Col md={5}>
                             <div className="mt-2">
-                                <img src={thisPokeData.img} width="70%" />
+                                <img src={thisPokeData.img} width="70%" className="ml-5"/>
                             </div>
                         </Col>
-                        <Col md={7}>
-                            <Description desc = {thisPokeData.desc} />
+                        <Col md={3}>
+                            <PokeDex abilities={thisPokeData.abilities} height={thisPokeData.height} weight={thisPokeData.weight} type={thisPokeData.type} shape={thisPokeData.shape} habitat={thisPokeData.habitat} />
+                        </Col>
+                        <Col md={3}>
+                            <Training base_exp={thisPokeData.base_exp} capture_rate={thisPokeData.capture_rate} growth_rate={thisPokeData.growth_rate} />
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={3}>
-                            <Stats stats = {thisPokeData.stats}/>
-                        </Col>
-                        <Col md={9}>
-                            
-                        </Col>
+                        <Stats stats={thisPokeData.stats} />
                     </Row>
-                    <Moves moves ={thisPokeData.moves} />
+                    <Row>
+                        <Evolution chain={thisPokeData.evo}/>
+                    </Row>
+                    <Row>
+                        <Description desc={thisPokeData.desc} />
+                    </Row>
+                    <Moves moves={thisPokeData.moves} movesInfo={thisPokeData.movesInfo} />
                 </Container>
             </>}
         </>

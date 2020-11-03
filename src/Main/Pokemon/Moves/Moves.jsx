@@ -2,8 +2,11 @@ import React from 'react'
 import { Row, Col, Tab, Nav } from 'react-bootstrap';
 import MovesTable from './MovesTable';
 
-function Moves({ moves }) {
+function Moves({ moves, movesInfo }) {
     let sortedMoves = [];
+    let movesData = [];
+    let movesURL = [];
+
     function sortByVersion() {
         let order = [
             "red-blue", "yellow", "gold-silver", "crystal",
@@ -48,9 +51,21 @@ function Moves({ moves }) {
             sortedMoves[index].moves[indexOfLevel].moves = temp;
         })
     }
+    function getMovesInfo(){
+        let axios = require('axios');
+        movesInfo.forEach(x=>{
+            movesURL.push(axios.get(x.url))
+        })
+            axios.all(movesURL)
+            .then(axios.spread((...res) => {
+                res.forEach(x=>{
+                    movesData.push({name: [x.data.name], type: x.data.type.name,})
+                })
+            }))
+    }
     sortByVersion();
     sortMoveLevel();
-
+    getMovesInfo();
     function generateMoves() {
         function fixVerName(name) {
             if(name == 'xd'){
@@ -82,8 +97,8 @@ function Moves({ moves }) {
                         <Col sm={9}>
                             <Tab.Content>
                                 {sortedMoves.map((el, index) => (
-                                    <Tab.Pane eventKey={el.name}>
-                                        <MovesTable list={el.moves} key={index} />
+                                    <Tab.Pane eventKey={el.name} key={index}>
+                                        <MovesTable list={el.moves} />
                                     </Tab.Pane>
                                 ))}
                             </Tab.Content>
@@ -93,8 +108,6 @@ function Moves({ moves }) {
             </div>
         )
     }
-
-    console.log(sortedMoves);
     generateMoves();
     return (
         <>
