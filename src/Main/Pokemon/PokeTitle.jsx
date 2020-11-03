@@ -29,7 +29,7 @@ function PokeTitle({ id, name, gen, sprite }) {
             <Col md={2} xs={5} className="text-center d-flex flex-column align-items-center justify-content-center mx-auto">
                 {id !== '1' &&
                     <Link to={`/pokemon/${Number(id) - 1}`}>
-                        <div className="pl-2">
+                        <div className="pl-2 mt-3">
                             Previous Pokémon
                         </div>
                         <div className="h2">
@@ -42,7 +42,7 @@ function PokeTitle({ id, name, gen, sprite }) {
             <Col md={2} xs={5} xs={{ order: 'last' }} className="text-center d-flex flex-column align-items-center justify-content-center mx-auto">
                 {id != 898 &&
                     <Link to={`/pokemon/${Number(id) + 1}`}>
-                        <div className="pr-2">
+                        <div className="pr-2 mt-3">
                             Next Pokémon
                         </div>
                         <div className="h2">

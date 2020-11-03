@@ -23,8 +23,8 @@ function PokeDex({ abilities, height, weight, type, shape, habitat, }) {
                     <td className="align-middle">Type</td>
                     <td>
                         {type.map((t, index) => (
-                            <span className="mx-1" key={index}>
-                                <Badge variant={`type ${t}`} className="py-1 px-3 w-70">{fixName(t)}</Badge>
+                            <span key={index}>
+                                <Badge variant={`type ${t}`} className="py-1">{fixName(t)}</Badge>
                             </span>
                         ))}
                     </td>

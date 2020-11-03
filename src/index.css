@@ -83,10 +83,10 @@ code {
 
 .evo-caption {
   margin-top: -20px;
+  padding-bottom: 10px;
 }
 
 .evo-1-row {
-  margin-top: -20px;
 }
 
 #evo-container {
@@ -95,7 +95,7 @@ code {
 
 .badge-type {
   color: white;
-  width: 70px;
+  width: 80px;
 }
 .badge-type.normal{
   background-color: #A8A878;
@@ -150,6 +150,7 @@ code {
   border: 1px solid #4E8234;
 }
 .badge-type.electric{
+  color: brown;
   background-color: #F8D030;
   border: 1px solid #A1871F;
 }

@@ -46,28 +46,3 @@ function Stats({ stats }) {
 }
 
 export default Stats
-
-
-/*
-{desc.map((el, index) => (
-                        <tr key={index} className="border rounded-lg">
-                            <td className="text-center">
-                                {Array.isArray(el.version) ?
-                                    el.version.map((x) => (
-                                        <div className="border rounded-lg">
-                                            {x.name ? x.name[0].toUpperCase() + x.name.slice(1) : ""}
-                                        </div>
-                                    )) :
-                                    <div className="border rounded-lg mt-2">
-                                        {(el.version.name[0].toUpperCase() + el.version.name.slice(1))}
-                                    </div>
-                                }
-                            </td>
-                            <td className="border rounded-lg">
-                                <div className="border rounded-lg pl-2 ">
-                                    {el.flavor_text}
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
-*/

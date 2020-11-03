@@ -186,7 +186,7 @@ function Pokemon() {
         <>
             {thisPokeData.loading && <>
                 <PokeTitle id={thisPokeData.id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite}/>
-                <Container className="mt-4" id="poke-body">
+                <Container className="mt-4 px-5" id="poke-body">
                     <hr />
                     <Row>
                         <Col md={5}>
