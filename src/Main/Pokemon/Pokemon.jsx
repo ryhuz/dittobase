@@ -80,17 +80,28 @@ function Pokemon() {
                 let tempMovesInfo = []
                 let tempImg = "";
                 let tempSprite = "";
-                try {
+                try { // get img
                     tempImg = require(`../../sprites/pokemon/other/official-artwork/${id}.png`).default;
                 } catch (err) {
                     tempImg = "";
                     console.log(err);
                 }
-                try {
-                    tempSprite = require(`../../sprites/pokemon/${id}.png`).default;
+                try { // get sprite
+                    tempSprite = require(`../../sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`).default;
+                    console.log(tempSprite);
                 } catch (err) {
-                    tempSprite = "";
-                    console.log(err);
+                    try{
+                        tempSprite = require(`../../sprites/pokemon/model/${id}.png`).default
+                    }catch (er){
+                        try{
+                            tempSprite = require(`../../sprites/pokemon/${id}.png`).default
+                        }catch (e){
+                            console.log('3rd sprite not found. No sprite')
+                            tempSprite = "";
+                        }
+                        console.log('2nd sprite not found.')
+                    }
+                    console.log('1st sprite not found.')
                 }
                 function getDesc() {
                     let allDesc = res[1].data.flavor_text_entries.filter(x => x.language.name === 'en')
@@ -190,11 +201,11 @@ function Pokemon() {
                             <Training base_exp={thisPokeData.base_exp} capture_rate={thisPokeData.capture_rate} growth_rate={thisPokeData.growth_rate} />
                         </Col>
                     </Row>
-                    <Row>
-                        <Stats stats={thisPokeData.stats} />
+                    <Row className="mb-4">
+                        <Evolution chain={thisPokeData.evo} currPoke={thisPokeData.name} id={thisPokeData.id} />
                     </Row>
                     <Row>
-                        <Evolution chain={thisPokeData.evo}/>
+                        <Stats stats={thisPokeData.stats} />
                     </Row>
                     <Row>
                         <Description desc={thisPokeData.desc} />
@@ -207,86 +218,3 @@ function Pokemon() {
 }
 
 export default Pokemon
-
-/*
-function getPokeEvo() {
-                    let tempEvo = [];
-                    axios.get(res[1].data.evolution_chain.url)
-                        .then(evo => {
-                            let x = evo.data.chain
-                            tempEvo.push({ name: x.species.name, url: x.species.url.split('/')[6], curr: (x.species.name == res[0].data.name) });
-                            function checkEvoBranch(evolv, stage = 1) {
-                                while (evolv.length) {
-                                    if (!tempEvo[stage]) {
-                                        tempEvo[stage] = [];
-                                    }
-                                    evolv.forEach(p => {
-                                        function getTrigger(t) {
-                                            let temp;
-                                            if(t.trigger){
-                                                if (t.trigger.name == 'level-up') {
-                                                    temp = { name: t.min_level && `Level ${t.min_level}`, holding: t.item && t.item.name.split('-').forEach(x => x[0].toUpperCase() + x.slice(1)).join(' ') }
-                                                } else if (t.trigger.name == 'trade') {
-                                                    temp = { name: `Trade`, holding: t.item && t.item.name.split('-').forEach(x => x[0].toUpperCase() + x.slice(1)).join(' ') }
-                                                } else if (t.trigger.name == 'use-item') {
-                                                    temp = { name: t.item.split('-').forEach(x => x[0].toUpperCase() + x.slice(1)).join(' ') }
-                                                }
-                                            }
-                                            return temp;
-                                        }
-                
-                                        tempEvo[stage].push({ name: p.species.name, url: p.species.url.split('/')[6], curr: (p.species.name == res[0].data.name), trigger: getTrigger(p.evolution_details), })
-                                        checkEvoBranch(p.evolves_to, stage + 1);
-                                    })
-                                }
-                            }
-                            checkEvoBranch(x.evolves_to);
-                        }).catch()
-                }
-*/
-
-
-function showEvo() {
-    /* let from = require(`../sprites/pokemon/${Number(id) - 1}.png`).default
-    let to = require(`../sprites/pokemon/${Number(id) + 1}.png`).default
-    return (
-        <Container>
-            <CardDeck>
-                <Card className="evo-card">
-                    <Card.Img variant="top" src={from} />
-                    <Card.Footer className="text-center">
-                        <small className="text-muted">Bulbasaur</small>
-                    </Card.Footer>
-                </Card>
-                <div className="d-flex align-items-center">
-                    <Card.Text>
-                        Evolves at
-                        <div>
-                            <FontAwesomeIcon icon={faLongArrowAltRight} />
-                        </div>
-                    </Card.Text>
-                </div>
-                <Card className="evo-card">
-                    <Card.Img variant="top" src={thisPokeData.sprite} />
-                    <Card.Footer className="text-center">
-                        <small className="text-muted">Ivysaur</small>
-                    </Card.Footer>
-                </Card>
-                <div>
-                    <Card.Text>
-                        Evolves at
-                        <div>
-                            <FontAwesomeIcon icon={faLongArrowAltRight} />
-                        </div>
-                    </Card.Text>
-                </div>
-                <Card className="evo-card">
-                    <Card.Img variant="top" src={to} />
-                    <Card.Footer className="text-center">
-                        <small className="text-muted">Venusaur</small>
-                    </Card.Footer>
-                </Card>
-            </CardDeck>
-        </Container>
-    ) */
-}

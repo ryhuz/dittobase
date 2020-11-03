@@ -51,6 +51,15 @@ code {
   margin: 0 auto;
 }
 
+#poke-title a{
+  color: black;
+}
+
+#poke-title a:hover{
+  color: #af1e1e;
+  text-decoration: none;
+}
+
 #poke-desc-head .poke-desc-version {
   width:20%;
 }
@@ -72,11 +81,22 @@ code {
   margin-top: -17px
 }
 
+.evo-caption {
+  margin-top: -20px;
+}
+
+.evo-1-row {
+  margin-top: -20px;
+}
+
+#evo-container {
+  margin-top: -20px;
+}
+
 .badge-type {
   color: white;
   width: 70px;
 }
-
 .badge-type.normal{
   background-color: #A8A878;
   border: 1px solid #6D6D4E;
