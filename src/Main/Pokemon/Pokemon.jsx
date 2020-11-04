@@ -89,7 +89,6 @@ function Pokemon() {
                 }
                 try { // get sprite
                     tempSprite = require(`../../sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`).default;
-                    console.log(tempSprite);
                 } catch (err) {
                     try{
                         tempSprite = require(`../../sprites/pokemon/model/${id}.png`).default

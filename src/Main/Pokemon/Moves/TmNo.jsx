@@ -1,10 +1,16 @@
 import React from 'react'
 
-function TmNo() {
+function TmNo({ name, tm, version }) {
+    let index;
+    /* if(tm){
+        index = tm[version].findIndex(el => (el.move === name));
+    } */
+    console.log(tm[version]);
+
     return (
-        <div>
-            TM
-        </div>
+        <>
+           {/*  {tm && tm[version][index].name} */}
+        </>
     )
 }
 
