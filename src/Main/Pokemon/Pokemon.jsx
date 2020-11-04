@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import Description from './Cards/Description';
 import Stats from './Cards/Stats';
 import Moves from './Moves/Moves';
@@ -10,10 +10,11 @@ import PokeDex from './Cards/PokeDex';
 import Training from './Cards/Training';
 
 function Pokemon() {
-    // https://pokeapi.co/api/v2/pokemon-species/1/ for description, evolution chain
-    // https://pokeapi.co/api/v2/pokemon/1/ for move list, sprites, stats, types
-
     let { id } = useParams();
+    let invalid = false;
+    if (isNaN(id) || id <1 || id>898){
+        invalid = true;
+    }
     let gen = "";
     switch (true) {
         case (id <= 151):
@@ -123,7 +124,7 @@ function Pokemon() {
                     })
                 }
 
-                res[0].data.moves.forEach(move => {
+                res[0].data.moves.forEach(move => {                                         // getting moves
                     tempMovesInfo.push({ name: move.move.name, url: move.move.url, })
                     move.version_group_details.forEach(version => {
                         function propertyChk(ver, meth) {
@@ -142,7 +143,7 @@ function Pokemon() {
                             tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name, level: version.level_learned_at })
                         } else if (version.move_learn_method.name === 'machine') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
-                            tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name, url: version.move_learn_method.url });
+                            tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name, tm_ver: version.version_group.name });
                         } else if (version.move_learn_method.name === 'tutor') {
                             propertyChk(version.version_group.name, version.move_learn_method.name);
                             tempMoves[version.version_group.name][version.move_learn_method.name].push({ name: move.move.name })
@@ -184,6 +185,7 @@ function Pokemon() {
     }, [id])
     return (
         <>
+            {invalid && <Redirect to="/missing" />}
             {thisPokeData.loading && <>
                 <PokeTitle id={thisPokeData.id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite}/>
                 <Container className="mt-4 px-5" id="poke-body">

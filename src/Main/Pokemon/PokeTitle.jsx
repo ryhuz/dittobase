@@ -23,7 +23,7 @@ function PokeTitle({ id, name, gen, sprite }) {
                     <h2>{chkFF(name)}</h2>
                 </div>
                 <div className="ml-2">
-                    <img src={sprite} />
+                    <img src={sprite} className="mt-2" />
                 </div>
             </Col>
             <Col md={2} xs={5} className="text-center d-flex flex-column align-items-center justify-content-center mx-auto">

@@ -227,7 +227,7 @@ function Search() {
     }, [searchParam])
 
     return (
-        <div>
+        <div className="pb-5 mb-5">
             <Jumbotron fluid className="d-flex align-items-center text-center search">
                 <Container className="banner-text rounded-lg p-3">
                     <h1>Search Pokémon</h1>

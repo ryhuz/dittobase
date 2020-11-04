@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import { Table, Col } from 'react-bootstrap';
+import { Table, Col, ProgressBar } from 'react-bootstrap';
 
 function Stats({ stats }) {
-    const [sliderNStats, setLevelSlider] = useState({
-        slider: 1,
-        stats: [
-            { name: 'hp', base_stat: stats[0].base_stat, },
-            { name: 'attack', base_stat: stats[1].base_stat, },
-            { name: 'defense', base_stat: stats[2].base_stat, },
-            { name: 'special-attack', base_stat: stats[3].base_stat, },
-            { name: 'special-defense', base_stat: stats[4].base_stat, },
-            { name: 'speed', base_stat: stats[5].base_stat, },
-        ]
-    });
+    const [slider, setLevelSlider] = useState(1);
     function fixName(name) {
-        let n = name.replace('special', 'sp');
+        let n = name;
+        if (n.includes('special')) {
+            n = n.replace('special', 'sp');
+            n = n.replace('attack', 'atk');
+            n = n.replace('defense', 'def');
+        }
+
         if (n === 'hp') {
             return 'HP';
         } else if (n.split('-').length === 1) {
@@ -26,20 +22,62 @@ function Stats({ stats }) {
         return '';
     }
     function onSlide(e) {
-        setLevelSlider({
-            slider: e.target.value,
-            stats: [
-                { name: 'hp', base_stat: stats[0].base_stat * e.target.value, },
-                { name: 'attack', base_stat: stats[1].base_stat * e.target.value, },
-                { name: 'defense', base_stat: stats[2].base_stat * e.target.value, },
-                { name: 'special-attack', base_stat: stats[3].base_stat * e.target.value, },
-                { name: 'special-defense', base_stat: stats[4].base_stat * e.target.value, },
-                { name: 'speed', base_stat: stats[5].base_stat * e.target.value, },
-            ]
-        });
+        setLevelSlider(e.target.value);
     }
-    function calcStats(base, level){
-        // DO CALCULATIONS HERE FOR MIN AND MAX AND RETURN AS STRING
+    function calcMin(base, level, stat) {
+        let min;
+        if (stat === 'hp') {
+            min = Math.floor(base * 2 * Number(level) / 100) + Number(level) + 10;
+        } else {
+            min = Math.floor(base * 2 * Number(level) / 100) + 5;
+        }
+        return min;
+    }
+    function calcMax(base, level, stat) {
+        let max;
+        if (stat === 'hp') {
+            max = Math.floor(((base + 15) * 2 + 63) * Number(level) / 100) + Number(level) + 10;
+        } else {
+            max = Math.floor(((base + 15) * 2 + 63) * Number(level) / 100) + 5;
+        }
+        return max;
+    }
+    function calcPBar(base, stat) {
+        let max;
+        switch (stat) {
+            case 'hp':
+                max = 255;
+                break;
+            case 'attack':
+                max = 190;
+                break;
+            case 'defense':
+                max = 250;
+                break;
+            case 'special-attack':
+                max = 194;
+                break;
+            case 'special-defense':
+                max = 250;
+                break;
+            case 'speed':
+                max = 200;
+                break;
+        }
+        let p = base/max*100;
+        if (p<15){
+            return 'v-low';
+        }else if (p<30){
+            return 'low'
+        }else if (p<48){
+            return 'medium'
+        }else if (p<65){
+            return 'high'
+        }else if (p<82){
+            return 'v-high'
+        }else {
+            return 'max'
+        }
     }
     return (
         <>
@@ -50,63 +88,52 @@ function Stats({ stats }) {
                     <thead className="">
                         <tr className="">
                             <th colSpan="4" scope="col" className="p-3">
-                                <span className="py-2">Stats at Level {sliderNStats.slider}</span>
-                                <input type="range" min="1" max="100" value={sliderNStats.slider} onChange={onSlide} id="slider" />
+                                <span className="py-2">Stats at Level {slider}</span>
+                                <input type="range" min="1" max="100" value={slider} onChange={onSlide} id="slider" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th className="align-middle">Stat</th>
+                            <th className="text-center align-middle">Base Value</th>
+                            <th></th>
+                            <th className="text-center align-middle">
+                                Min
+                            </th>
+                            <th className="text-center align-middle">
+                                Max
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {sliderNStats.stats.map((el, index) => (
-                            <tr key={index} className="border rounded-lg">
-                                <td className="border rounded-lg px-2" width="12%">
+                        {stats.map((el, index) => (
+                            <tr key={index} className="">
+                                <td className="border rounded-lg px-2 text-right" width="8%">
                                     {fixName(el.name)}
                                 </td>
                                 <td className="text-center " width="8%">
                                     {el.base_stat}
                                 </td>
-                                <td className="pl-1" width="64%">
-                                    progress bar
+                                <td className="pl-1 align-middle" width="68%">
+                                    <ProgressBar className={`align-items-center stat-bar ${calcPBar(el.base_stat, el.name)}`} now={(el.base_stat / 255) * 150} />
                                 </td>
                                 <td className="text-center" width="8%">
-                                    calc
+                                    {calcMin(el.base_stat, slider, el.name)}
                                 </td>
                                 <td className="text-center" width="8%">
-                                    calc
-                            </td>
+                                    {calcMax(el.base_stat, slider, el.name)}
+                                </td>
                             </tr>
                         ))}
-                    </tbody>
-                </Table>
-
-            </Col>
-
-
-            <Table size="sm">
-                <thead className="border rounded-lg">
-                    <tr className="border rounded-lg">
-                        <th colSpan="2" scope="col" className="border rounded-lg text-center"><div>Base Stats</div></th>
-                        <th colSpan="2" scope="col" className="border rounded-lg text-center"><div>Stats at Level</div></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {stats.length && stats.map((el, index) => (
-                        <tr key={index} className="border rounded-lg">
-                            <td className="border rounded-lg pl-4" width="35%">
-                                {fixName(el.name)}
-                            </td>
-                            <td className="text-center border rounded-lg" width="15%">
-                                {el.base_stat}
-                            </td>
-                            <td className="border rounded-lg pl-4" width="35%">
-                                {fixName(el.name)}
-                            </td>
-                            <td className="text-center border rounded-lg" width="15%">
-                                calc
+                        <tr>
+                            <td colSpan="4">
+                                <div className="small">
+                                    *Does not factor in Pokémon nature
+                                </div>
                             </td>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </tbody>
+                </Table>
+            </Col>
         </>
     )
 }

@@ -1,11 +1,9 @@
 import React from 'react'
-import { Row, Col, Tab, Nav } from 'react-bootstrap';
+import { Tab, Nav, Table } from 'react-bootstrap';
 import MovesTable from './MovesTable';
 
 function Moves({ moves, movesInfo }) {
     let sortedMoves = [];
-    let movesData = [];
-    let movesURL = [];
 
     function sortByVersion() {
         let order = [
@@ -51,59 +49,49 @@ function Moves({ moves, movesInfo }) {
             sortedMoves[index].moves[indexOfLevel].moves = temp;
         })
     }
-    function getMovesInfo(){
-        let axios = require('axios');
-        movesInfo.forEach(x=>{
-            movesURL.push(axios.get(x.url))
-        })
-            axios.all(movesURL)
-            .then(axios.spread((...res) => {
-                res.forEach(x=>{
-                    movesData.push({name: [x.data.name], type: x.data.type.name,})
-                })
-            }))
-    }
+
     sortByVersion();
     sortMoveLevel();
-    getMovesInfo();
     function generateMoves() {
         function fixVerName(name) {
-            if(name == 'xd'){
+            if (name == 'xd') {
                 return 'XD'
-            }else if (name.split('-').length === 1) {
+            } else if (name.split('-').length === 1) {
                 return name[0].toUpperCase() + name.slice(1);
-            }else if (name.split('-').length === 4){
+            } else if (name.split('-').length === 4) {
                 let temp = name.split('-');
-                return temp[0][0].toUpperCase() + temp[0].slice(1) + ' ' + temp[1][0].toUpperCase() + temp[1].slice(1)  + '/' + temp[2][0].toUpperCase() + temp[2].slice(1) + ' ' + temp[3][0].toUpperCase() + temp[3].slice(1);
-            }else {
+                return temp[0][0].toUpperCase() + temp[0].slice(1) + ' ' + temp[1][0].toUpperCase() + temp[1].slice(1) + '/' + temp[2][0].toUpperCase() + temp[2].slice(1) + ' ' + temp[3][0].toUpperCase() + temp[3].slice(1);
+            } else {
                 let temp = name.split('-');
                 return temp[0][0].toUpperCase() + temp[0].slice(1) + '/' + temp[1][0].toUpperCase() + temp[1].slice(1);
             }
             return '';
         }
         return (
-            <div id="moves">
+            <div id="moves" className="mb-5">
                 <Tab.Container defaultActiveKey={sortedMoves[0].name}>
-                    <Row>
-                        <Col sm={3}>
-                            <Nav variant="pills" className="flex-column">
-                                {sortedMoves.map((el, index) => (
-                                    <Nav.Item key={index} className={el.name}>
-                                        <Nav.Link eventKey={el.name} className={el.name}>{fixVerName(el.name)}</Nav.Link>
-                                    </Nav.Item>
-                                ))}
-                            </Nav>
-                        </Col>
-                        <Col sm={9}>
-                            <Tab.Content>
-                                {sortedMoves.map((el, index) => (
-                                    <Tab.Pane eventKey={el.name} key={index}>
-                                        <MovesTable list={el.moves} />
-                                    </Tab.Pane>
-                                ))}
-                            </Tab.Content>
-                        </Col>
-                    </Row>
+                    <Table>
+                        <tr>
+                            <td width="4%">
+                                <Nav variant="pills" className="flex-column">
+                                    {sortedMoves.map((el, index) => (
+                                        <Nav.Item key={index} className={el.name}>
+                                            <Nav.Link eventKey={el.name} className={el.name}>{fixVerName(el.name)}</Nav.Link>
+                                        </Nav.Item>
+                                    ))}
+                                </Nav>
+                            </td>
+                            <td>
+                                <Tab.Content>
+                                    {sortedMoves.map((el, index) => (
+                                        <Tab.Pane eventKey={el.name} key={index}>
+                                            <MovesTable list={el.moves} movesInfo={movesInfo} />
+                                        </Tab.Pane>
+                                    ))}
+                                </Tab.Content>
+                            </td>
+                        </tr>
+                    </Table>
                 </Tab.Container>
             </div>
         )

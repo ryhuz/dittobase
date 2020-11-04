@@ -9,7 +9,6 @@ function PokeDex({ abilities, height, weight, type, shape, habitat, }) {
             let temp = n.split('-');
             return temp[0][0].toUpperCase() + temp[0].slice(1) + ' ' + temp[1][0].toUpperCase() + temp[1].slice(1);
         }
-        
     }
     return (
         <Table size="sm">

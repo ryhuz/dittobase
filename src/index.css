@@ -86,9 +86,6 @@ code {
   padding-bottom: 10px;
 }
 
-.evo-1-row {
-}
-
 #evo-container {
   margin-top: -20px;
 }
@@ -124,9 +121,52 @@ code {
   cursor: pointer;
 }
 
+.progress.stat-bar {
+  background-color: transparent;
+}
+.v-low .progress-bar{
+  background-color: #f34444;
+  border: 1px solid #cf3a3a;
+  border-radius: 5px;
+  height: 12px;
+}
+.low .progress-bar{
+  background-color: #ff7f0f;
+  border: 1px solid #d96c0d;
+  border-radius: 5px;
+  height: 12px;
+}
+.medium .progress-bar{
+  background-color: #ffdd57;
+  border: 1px solid #d9bc4a;
+  border-radius: 5px;
+  height: 12px;
+}
+.high .progress-bar{
+  background-color: #a0e515;
+  border: 1px solid #88c312;
+  border-radius: 5px;
+  height: 12px;
+}
+.v-high .progress-bar{
+  background-color: #23cd5e;
+  border: 1px solid #1eae50;
+  border-radius: 5px;
+  height: 12px;
+}
+.max .progress-bar{
+  background-color: #00c2b8;
+  border: 1px solid #00a59d;
+  border-radius: 5px;
+  height: 12px;
+}
+
 .badge-type {
   color: white;
   width: 80px;
+}
+.badge-type.moves {
+  width: 50px;
 }
 .badge-type.normal{
   background-color: #A8A878;

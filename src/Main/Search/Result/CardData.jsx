@@ -8,7 +8,6 @@ function CardData({ pokeData }) {
         id: "",
         name: pokeData.name,
         img: "",
-        gen: "",
     })
     const [loading, setLoad] = useState(false)
 
