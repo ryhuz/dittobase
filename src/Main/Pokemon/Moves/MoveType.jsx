@@ -10,8 +10,8 @@ function MoveType({ param, url }) {
     }
     function getTypes() {
         let axios = require('axios');
-
-        axios.get(url)
+        if(url){
+            axios.get(url)
             .then(res => {
                 setTypes({
                     type: res.data.type.name,
@@ -20,6 +20,7 @@ function MoveType({ param, url }) {
             }).catch(err => {
                 console.log(err);
             })
+        }
     }
     function getLogo() {
         let x;

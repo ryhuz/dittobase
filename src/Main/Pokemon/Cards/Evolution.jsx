@@ -66,10 +66,12 @@ function Evolution({ chain, currPoke, id }) {
             return (
                 <Col>
                     {evolution.length <= 1 ?
-                        <div>                                                                                       {/* if no evolution */}
-                            {evolution[0].name}                                                                     {/*       |         */}
-                            <img src={evolution[0].img} />                                                          {/*       |         */}
-                        </div> :
+                        <Row className="justify-content-center" id="evo-container">
+                            <Col xs={2} className="d-flex flex-column justify-content-center">                    {/* if no evolution */}
+                                <div><img src={evolution[0].img} width="100%" /></div>                            {/*       |         */}
+                                <div className="text-center evo-caption">{chkFF(evolution[0].name)}</div>
+                            </Col>                                                                                {/*       |         */}
+                        </Row> :
                         <Row className="justify-content-center" id="evo-container">
                             <Col xs={2} className="d-flex flex-column justify-content-center">                      {/* first stage of evolution */}
                                 <div className={`${evolution[0].this && 'border border-secondary'}`}>               {/*             |            */}
@@ -122,7 +124,7 @@ function Evolution({ chain, currPoke, id }) {
                 </Col>
             )
         }
-        function ifEevee(){
+        function ifEevee() {
             return (
                 <Col>
                     {evolution.length <= 1 ?
