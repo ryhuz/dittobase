@@ -1,39 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
-import { Card } from 'react-bootstrap'
-
-import {testerPokemon} from '../../TestApi/Test' //delete later
+import React, { useState } from 'react'
+import { Container, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function RandomPokemon() {
-    const [randPoke, newRandPoke] = useState({name: "", pic: "",});
+    // let key = process.env.REACT_APP_API_KEY
+    // let axios = require('axios');
+    // const [no, setNo] = useState(0);
+    let no = Math.floor(Math.random()*897)+1;
+    let img;
+    try{
+        img = require(`../../sprites/pokemon/other/official-artwork/${no}.png`).default;
+    }catch{
+        img = "";
+    }
+/* 
+    axios.get('https://api.random.org/json-rpc/2/invoke')
+    .then(r=>{
 
-    /* 
-        useEffect(() => {
-            let axios = require('axios');
-            let pokedex = 'https://pokeapi.co/api/v2/';
-            let random = (Math.floor(Math.random() * 892)+1)
-            axios.get(`${pokedex}pokemon/${random}`)
-                .then(result => {
-                    newRandPoke(result.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }, []); */
-    
-        useEffect(() => {
-            let name = testerPokemon.name[0].toUpperCase() + testerPokemon.name.slice(1);
-            newRandPoke({name, pic: testerPokemon.sprites.other['official-artwork'].front_default});
-        }, [])
-
-        
-
+    }).catch(e=>{
+        setNo()
+        let img = require(`../../sprites/pokemon/other/official-artwork/${no}.png`).default;
+    })
+ */
     return (
         <Container>
-            <Card className="p-3">
-                <img width="100%" src = {randPoke.pic} />
-                <div className="h4 text-center">{randPoke.name}</div>
-            </Card>
+            <Link to={`/pokemon/${no}`}>
+                <Card className="p-3">
+                    <img width="100%" src={img} />
+                </Card>
+            </Link>
         </Container>
     )
 }

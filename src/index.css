@@ -21,7 +21,16 @@ code {
 }
 
 .jumbotron.home {
-  background-image: url('./11910.jpg');
+  background-image: url('https://i.redd.it/jks7bjesfbb21.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 50vh;
+  position: sticky;
+}
+
+.jumbotron.about {
+  background-image: url('./ditto.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

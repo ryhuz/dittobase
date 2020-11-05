@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import About from './Main/About';
 import Home from './Main/Home';
 import Missing from './Main/Missing';
 import Navigation from './Main/Navigation';
@@ -24,8 +25,11 @@ function App() {
         <Route path="/missing/" >
           <Missing />
         </Route>
-        <Route>
-
+        <Route path="/about" >
+          <About />
+        </Route>
+        <Route path="/">
+          <Missing />
         </Route>
       </Switch>
     </Router>
