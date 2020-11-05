@@ -195,9 +195,8 @@ function Evolution({ chain, currPoke, id }) {
         getEvoChain();
     }, [currPoke])
     return (
-        <Col className="mt-2">
-            <hr />
-            <h3>Evolution</h3>
+        <Col className="my-3">
+            <h3 className="ml-3">Evolution</h3>
             <Row className="mx-auto">
                 {displayEvoChain()}
             </Row>

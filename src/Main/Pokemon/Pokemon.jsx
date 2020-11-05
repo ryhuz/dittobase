@@ -12,7 +12,7 @@ import Training from './Cards/Training';
 function Pokemon() {
     let { id } = useParams();
     let invalid = false;
-    if (isNaN(id) || id <1 || id>898){
+    if (isNaN(id) || id < 1 || id > 898) {
         invalid = true;
     }
     let gen = "";
@@ -90,12 +90,12 @@ function Pokemon() {
                 try { // get sprite
                     tempSprite = require(`../../sprites/pokemon/versions/generation-v/black-white/animated/${id}.gif`).default;
                 } catch (err) {
-                    try{
+                    try {
                         tempSprite = require(`../../sprites/pokemon/model/${id}.png`).default
-                    }catch (er){
-                        try{
+                    } catch (er) {
+                        try {
                             tempSprite = require(`../../sprites/pokemon/${id}.png`).default
-                        }catch (e){
+                        } catch (e) {
                             console.log('3rd sprite not found. No sprite')
                             tempSprite = "";
                         }
@@ -183,16 +183,17 @@ function Pokemon() {
         getPokeData();
     }, [id])
     return (
-        <>
+        <div className={`hab-${thisPokeData.habitat} pb-3`}>
             {invalid && <Redirect to="/missing" />}
             {thisPokeData.loading && <>
-                <PokeTitle id={thisPokeData.id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite}/>
-                <Container className="mt-4 px-5" id="poke-body">
-                    <hr />
-                    <Row>
+                <Row className='section' id="poke-title">
+                    <PokeTitle id={thisPokeData.id} name={thisPokeData.name} gen={gen} sprite={thisPokeData.sprite} />
+                </Row>
+                <Container className="px-5" id="poke-body">
+                    <Row className='mt-1 pt-3 section'>
                         <Col md={5}>
-                            <div className="mt-2">
-                                <img src={thisPokeData.img} width="70%" className="ml-5"/>
+                            <div>
+                                <img src={thisPokeData.img} width="70%" className="ml-5" />
                             </div>
                         </Col>
                         <Col md={3}>
@@ -202,19 +203,25 @@ function Pokemon() {
                             <Training base_exp={thisPokeData.base_exp} capture_rate={thisPokeData.capture_rate} growth_rate={thisPokeData.growth_rate} />
                         </Col>
                     </Row>
-                    <Row className="mb-4">
+                    <hr />
+                    <Row className="mb-4 section">
                         <Evolution chain={thisPokeData.evo} currPoke={thisPokeData.name} id={thisPokeData.id} />
                     </Row>
-                    <Row>
+                    <hr />
+                    <Row className='mb-4 section'>
                         <Stats stats={thisPokeData.stats} />
                     </Row>
-                    <Row>
+                    <hr />
+                    <Row className='mb-4 section'>
                         <Description desc={thisPokeData.desc} />
                     </Row>
-                    <Moves moves={thisPokeData.moves} movesInfo={thisPokeData.movesInfo} />
+                    <hr />
+                    <Row className='mb-4 section'>
+                        <Moves moves={thisPokeData.moves} movesInfo={thisPokeData.movesInfo} />
+                    </Row>
                 </Container>
             </>}
-        </>
+        </div>
     )
 }
 

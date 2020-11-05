@@ -13,8 +13,8 @@ function PokeTitle({ id, name, gen, sprite }) {
         }
     }
     return (
-        <Row className="mt-3" id="poke-title" xs={4} >
-            <Col md={8} xs={12} md={{ order: 1 }}  className="d-flex border shadow py-2 pl-4 mx-auto">
+        <Row className="my-2" id="title-row" xs={4}>
+            <Col md={8, {order: 1}} xs={12} className="d-flex border shadow py-2 pl-4 mx-auto">
                 <div className="d-flex flex-column justify-content-center mr-4 text-center">
                     <h5><Badge variant="secondary" className="py-1 px-3" >#{id}</Badge></h5>
                     <div>Generation {gen}</div>
@@ -38,8 +38,7 @@ function PokeTitle({ id, name, gen, sprite }) {
                     </Link>
                 }
             </Col>
-            
-            <Col md={2} xs={5} xs={{ order: 'last' }} className="text-center d-flex flex-column align-items-center justify-content-center mx-auto">
+            <Col md={2} xs={5, { order: 'last' }} className="text-center d-flex flex-column align-items-center justify-content-center mx-auto">
                 {id != 898 &&
                     <Link to={`/pokemon/${Number(id) + 1}`}>
                         <div className="pr-2 mt-3">

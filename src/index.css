@@ -46,7 +46,7 @@ code {
   max-width: 1340px
 }
 
-#poke-title {
+#title-row, #poke-title {
   width: 100%;
   margin: 0 auto;
 }
@@ -60,11 +60,9 @@ code {
   text-decoration: none;
 }
 
-#poke-desc-head .poke-desc-version {
-  width:20%;
-}
-#poke-desc-body .poke-desc-version {
-    width: 20.2%;
+.section {
+  background-color: #ffffffd5;
+  border-radius: 10px;
 }
 
 #poke-desc-body {
@@ -246,10 +244,6 @@ code {
   border: 1px solid #44685E;
 }
 
-#moves {
-  margin-top: -17px;
-}
-
 .nav-pills .nav-link.active{
   border: 1px solid black;
 }
@@ -277,6 +271,7 @@ code {
 }
 .nav-pills .nav-link.active.crystal{
   background-color: #4fd9ff;
+  color: black;
 }
 .nav-pills .nav-link.active.ruby-sapphire{
   background: linear-gradient(
@@ -312,6 +307,7 @@ code {
   background-color: #999999;
 }
 .nav-pills .nav-link.active.heartgold-soulsilver{
+  color: black;
   background: linear-gradient(
     to right, 
     #b69e00 0%, 
@@ -321,6 +317,7 @@ code {
   );
 }
 .nav-pills .nav-link.active.black-white{
+  color: grey;
   background: linear-gradient(
     to right, 
     black 0%, 
@@ -336,6 +333,7 @@ code {
   background-color: #604e82;
 }
 .nav-pills .nav-link.active.black-2-white-2{
+  color: grey;
   background: linear-gradient(
     to right, 
     #424b50 0%, 
@@ -388,4 +386,53 @@ code {
     #6fa0cf 50%, 
     #6fa0cf 100%
   );
+}
+
+.hab-cave {
+  background-image: url('https://cdn.cnn.com/cnnnext/dam/assets/160824165317-hang-son-doong-2stargazing.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-forest {
+  background-image: url('https://i.pinimg.com/originals/ce/7f/55/ce7f55d0ce9ec88c238f4f0f5731d809.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-grassland {
+  background-image: url('https://cdn.britannica.com/86/133086-050-C1C97A72/habitat-Oglala-National-Grassland-Nebraska.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-mountain {
+  background-image: url('https://mountainlion.org/Us/nv/PORTAL/nvbackground1240x515.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-rough-terrain {
+  background-image: url('https://i.pinimg.com/originals/17/de/b6/17deb63a5b2462b8d0ca031aef10954a.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-sea {
+  background-image: url('https://i.pinimg.com/originals/b7/ff/e5/b7ffe556b5c07784ab6ee8e58ee08881.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-urban {
+  background-image: url('https://c.stocksy.com/a/AzN200/z9/568860.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
+}
+.hab-waters-edge {
+  background-image: url('https://images7.alphacoders.com/923/923676.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 0% 60%;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Container } from 'react-bootstrap';
 import { Table, Col, ProgressBar } from 'react-bootstrap';
 
 function Stats({ stats }) {
@@ -64,75 +65,76 @@ function Stats({ stats }) {
                 max = 200;
                 break;
         }
-        let p = base/max*100;
-        if (p<15){
+        let p = base / max * 100;
+        if (p < 15) {
             return 'v-low';
-        }else if (p<30){
+        } else if (p < 30) {
             return 'low'
-        }else if (p<48){
+        } else if (p < 48) {
             return 'medium'
-        }else if (p<65){
+        } else if (p < 65) {
             return 'high'
-        }else if (p<82){
+        } else if (p < 82) {
             return 'v-high'
-        }else {
+        } else {
             return 'max'
         }
     }
     return (
         <>
-            <Col className="mt-2">
-                <hr />
-                <h3>Stats</h3>
-                <Table size="sm">
-                    <thead className="">
-                        <tr className="">
-                            <th colSpan="4" scope="col" className="p-3">
-                                <span className="py-2">Stats at Level {slider}</span>
-                                <input type="range" min="1" max="100" value={slider} onChange={onSlide} id="slider" />
+            <Col className="my-3">
+                <h3 className="ml-3">Stats</h3>
+                <Container>
+                    <Table size="sm">
+                        <thead className="">
+                            <tr className="">
+                                <th colSpan="4" scope="col" className="p-3">
+                                    <span className="py-2">Stats at Level {slider}</span>
+                                    <input type="range" min="1" max="100" value={slider} onChange={onSlide} id="slider" />
+                                </th>
+                            </tr>
+                            <tr>
+                                <th className="align-middle">Stat</th>
+                                <th className="text-center align-middle">Base Value</th>
+                                <th></th>
+                                <th className="text-center align-middle">
+                                    Min
                             </th>
-                        </tr>
-                        <tr>
-                            <th className="align-middle">Stat</th>
-                            <th className="text-center align-middle">Base Value</th>
-                            <th></th>
-                            <th className="text-center align-middle">
-                                Min
+                                <th className="text-center align-middle">
+                                    Max
                             </th>
-                            <th className="text-center align-middle">
-                                Max
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {stats.map((el, index) => (
-                            <tr key={index} className="">
-                                <td className="border rounded-lg px-2 text-right" width="8%">
-                                    {fixName(el.name)}
-                                </td>
-                                <td className="text-center " width="8%">
-                                    {el.base_stat}
-                                </td>
-                                <td className="pl-1 align-middle" width="68%">
-                                    <ProgressBar className={`align-items-center stat-bar ${calcPBar(el.base_stat, el.name)}`} now={(el.base_stat / 255) * 150} />
-                                </td>
-                                <td className="text-center" width="8%">
-                                    {calcMin(el.base_stat, slider, el.name)}
-                                </td>
-                                <td className="text-center" width="8%">
-                                    {calcMax(el.base_stat, slider, el.name)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {stats.map((el, index) => (
+                                <tr key={index} className="">
+                                    <td className="border rounded-lg px-2 text-right" width="8%">
+                                        {fixName(el.name)}
+                                    </td>
+                                    <td className="text-center " width="8%">
+                                        {el.base_stat}
+                                    </td>
+                                    <td className="pl-1 align-middle" width="68%">
+                                        <ProgressBar className={`align-items-center stat-bar ${calcPBar(el.base_stat, el.name)}`} now={(el.base_stat / 255) * 150} />
+                                    </td>
+                                    <td className="text-center" width="8%">
+                                        {calcMin(el.base_stat, slider, el.name)}
+                                    </td>
+                                    <td className="text-center" width="8%">
+                                        {calcMax(el.base_stat, slider, el.name)}
+                                    </td>
+                                </tr>
+                            ))}
+                            <tr>
+                                <td colSpan="4">
+                                    <div className="small">
+                                        *Does not factor in Pokémon nature
+                                </div>
                                 </td>
                             </tr>
-                        ))}
-                        <tr>
-                            <td colSpan="4">
-                                <div className="small">
-                                    *Does not factor in Pokémon nature
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
+                        </tbody>
+                    </Table>
+                </Container>
             </Col>
         </>
     )
