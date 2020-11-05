@@ -18,8 +18,7 @@ Built with:
 
 ### Wireframes
 
-Your step by step planning sketch of your project, that you can post them as an image in here.
-
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Home.PNG)
 ### User Stories
 
 A story of the project user, that explains the use of the project.
