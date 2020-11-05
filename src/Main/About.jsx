@@ -11,7 +11,7 @@ function About() {
             </Jumbotron>
             <Container>
                 <p>
-                <b>Creator</b> : Shawn Wee, for GA SEI-25 Project 2
+                <h3>Creator</h3> : Shawn Wee, for GA SEI-25 Project 2
                 </p>
                 <p>
                 <b>Using</b> :
