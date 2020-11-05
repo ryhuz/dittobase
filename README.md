@@ -18,7 +18,7 @@ Built with:
 
 ### Wireframes
 
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Home.PNG)
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Home.PNG?raw=true)
 ### User Stories
 
 A story of the project user, that explains the use of the project.
