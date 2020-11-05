@@ -1,6 +1,6 @@
 {
   "homepage": "http://ryhuz.github.io/dittobase",
-  "name": "Dittobase",
+  "name": "dittobase",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
