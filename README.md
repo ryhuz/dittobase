@@ -18,7 +18,22 @@ Built with:
 
 ### Wireframes
 
+Home Page
 ![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Home.PNG?raw=true)
+
+Pokemon/Pokedex
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Pokemon-Pokedex.PNG?raw=true)
+
+Single Pokemon
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Single-Pokemon.PNG?raw=true)
+
+Damage Calculator
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Damage-Calculator.PNG?raw=true)
+
+Stats Calculator
+![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/Stats-Calculator.PNG?raw=true)
+
+
 ### User Stories
 
 A story of the project user, that explains the use of the project.
