@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/dittobase/static/css/main.d1578866.chunk.css",
-    "main.js": "/dittobase/static/js/main.a6d1f67c.chunk.js",
-    "main.js.map": "/dittobase/static/js/main.a6d1f67c.chunk.js.map",
-    "runtime-main.js": "/dittobase/static/js/runtime-main.fd655825.js",
-    "runtime-main.js.map": "/dittobase/static/js/runtime-main.fd655825.js.map",
+    "main.js": "/dittobase/static/js/main.3508f572.chunk.js",
+    "main.js.map": "/dittobase/static/js/main.3508f572.chunk.js.map",
+    "runtime-main.js": "/dittobase/static/js/runtime-main.86623ba3.js",
+    "runtime-main.js.map": "/dittobase/static/js/runtime-main.86623ba3.js.map",
     "static/css/2.20aa2d7b.chunk.css": "/dittobase/static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.36b3c739.chunk.js": "/dittobase/static/js/2.36b3c739.chunk.js",
-    "static/js/2.36b3c739.chunk.js.map": "/dittobase/static/js/2.36b3c739.chunk.js.map",
-    "static/js/3.a312076a.chunk.js": "/dittobase/static/js/3.a312076a.chunk.js",
-    "static/js/3.a312076a.chunk.js.map": "/dittobase/static/js/3.a312076a.chunk.js.map",
+    "static/js/2.ef414879.chunk.js": "/dittobase/static/js/2.ef414879.chunk.js",
+    "static/js/2.ef414879.chunk.js.map": "/dittobase/static/js/2.ef414879.chunk.js.map",
+    "static/js/3.2b18bc5f.chunk.js": "/dittobase/static/js/3.2b18bc5f.chunk.js",
+    "static/js/3.2b18bc5f.chunk.js.map": "/dittobase/static/js/3.2b18bc5f.chunk.js.map",
     "index.html": "/dittobase/index.html",
     "static/css/2.20aa2d7b.chunk.css.map": "/dittobase/static/css/2.20aa2d7b.chunk.css.map",
     "static/css/main.d1578866.chunk.css.map": "/dittobase/static/css/main.d1578866.chunk.css.map",
-    "static/js/2.36b3c739.chunk.js.LICENSE.txt": "/dittobase/static/js/2.36b3c739.chunk.js.LICENSE.txt",
+    "static/js/2.ef414879.chunk.js.LICENSE.txt": "/dittobase/static/js/2.ef414879.chunk.js.LICENSE.txt",
     "static/media/1.gif": "/dittobase/static/media/1.b87daafd.gif",
     "static/media/1.png": "/dittobase/static/media/1.961a737a.png",
     "static/media/10.gif": "/dittobase/static/media/10.dda53d52.gif",
@@ -1643,10 +1643,10 @@
     "static/media/charmander_loading.1aae0b9b.gif": "/dittobase/static/media/charmander_loading.1aae0b9b.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.fd655825.js",
+    "static/js/runtime-main.86623ba3.js",
     "static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.36b3c739.chunk.js",
+    "static/js/2.ef414879.chunk.js",
     "static/css/main.d1578866.chunk.css",
-    "static/js/main.a6d1f67c.chunk.js"
+    "static/js/main.3508f572.chunk.js"
   ]
 }
