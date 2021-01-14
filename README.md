@@ -7,9 +7,8 @@ Get information on your Pokémon, like stats and evolution charts
 
 With Dittobase, you can search for Pokémon by name, type, and generation. Learn about their Pokédex entries, their stats at various levels, evolutions, and their movesets with Dittobase!
 
-### Technical Used
+### Built with:
 
-Built with:
 - React
 - React-Router
 - Bootstrap/Bootstrap React
@@ -57,13 +56,24 @@ The 3 main pages (home, search, and pokemon entry) were planned first and how th
 
 The API relevant API calls had to be made at the correct points as PokeAPI segregates their information.
 
-### Problem-Solving Strategy
+### Problems that arose
 
-I built it component by component, and passing in the props one at a time so as to be clear of where an error arises from if it does.
+  * Debounce
+  
+    the debounce search was not running the search function after the debounce. Refactoring the code solved the problem
+
+  * Level slider on Pokemon Profile page
+  
+    I learnt that slider inputs on react also rely on state changes to update itself
+    
+  * Slow API calls
+  
+    Due to the number of pokemon, and the photos required, the loading of the page on deployment was very slow. I attempted to solve this by storing the main profile picture locally instead of calling it from the API. However, the limitations of heroku meant that the app's startup was still very slow.
+    
+    I hope to deploy it on a server which can handle faster API requests, or come up with a solution that reduces the number of API requests for the purpose.
 
 ### Unsolved problems
 
-- Not all the sprites are loaded due to the holes in the API. They can be hard-loaded into the src folder to rectify the problem
 - Move search and item search were left out due to the nature of the way the API stores the data. Will be a separate organisational project
 - Evolution triggers are not included for the same reason.
 
