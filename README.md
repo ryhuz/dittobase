@@ -19,19 +19,19 @@ Built with:
 ### Wireframes
 
 Home Page
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/wireframes/Home.PNG?raw=true)
+![Home](https://github.com/ryhuz/dittobase/blob/master/wireframes/Home.PNG)
 
 Pokemon/Pokedex
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/wireframes/Pokemon-Pokedex.PNG?raw=true)
+![Home](https://github.com/ryhuz/dittobase/blob/master/wireframes/Pokemon-Pokedex.PNG)
 
 Single Pokemon
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/wireframes/Single-Pokemon.PNG?raw=true)
+![Home](https://github.com/ryhuz/dittobase/blob/master/wireframes/Single-Pokemon.PNG)
 
 Damage Calculator
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/wireframes/Damage-Calculator.PNG?raw=true)
+![Home](https://github.com/ryhuz/dittobase/blob/master/wireframes/Damage-Calculator.PNG)
 
 Stats Calculator
-![Home](https://git.generalassemb.ly/ryhuz/dittobase/blob/master/wireframes/Stats-Calculator.PNG?raw=true)
+![Home](https://github.com/ryhuz/dittobase/blob/master/wireframes/Stats-Calculator.PNG)
 
 
 ### User Stories
